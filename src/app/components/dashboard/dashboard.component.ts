@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
 
   user: User | undefined;
 
-
   constructor(
     private fb: FormBuilder,
     private productsService: ProductsService,

@@ -1,5 +1,55 @@
 <div class="page">
   <div class="content">
-    <p>product works!</p>
+    <div class="center" *ngIf="loading">
+      <app-spinner></app-spinner>
+    </div>
+    <div class="product" *ngIf="!!product">
+      <button mat-button routerLink="/">< Back To All Products</button>
+      <div class="heading">
+        <h1>{{ product.title }}</h1>
+        <p>Stock: {{ product.stock }}</p>
+      </div>
+      <hr />
+      <div class="gallery">
+        <img *ngFor="let img of product.images" [src]="img" />
+      </div>
+
+      <div class="specs">
+        <div class="row">
+          <div>Name:</div>
+          <div>{{ product.title }}</div>
+        </div>
+        <div class="row">
+          <div>Description:</div>
+          <div>{{ product.description }}</div>
+        </div>
+        <div class="row">
+          <div>Brand:</div>
+          <div>{{ product.brand }}</div>
+        </div>
+        <div class="row">
+          <div>Category:</div>
+          <div>{{ product.category }}</div>
+        </div>
+        <div class="row">
+          <div>Rating:</div>
+          <div>{{ product.rating }}</div>
+        </div>
+        <div class="row">
+          <div>Price:</div>
+          <div class="price"><strong>{{ product.price }} € </strong> <span>{{ product.price | priceBeforeDiscount:product.discountPercentage}} €</span></div>
+        </div>
+      </div>
+
+      <div class="actions" *ngIf="!!user">
+        <button mat-icon-button>
+          <!-- <mat-icon>favorite</mat-icon> -->
+          <mat-icon>favorite_border</mat-icon>
+        </button>
+        <button mat-flat-button color="primary">
+          <mat-icon>shopping_cart</mat-icon>Add to cart
+        </button>
+      </div>
+    </div>
   </div>
 </div>

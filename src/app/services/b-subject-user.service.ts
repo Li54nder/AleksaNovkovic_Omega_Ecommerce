@@ -3,13 +3,17 @@ import { BehaviorSubject } from 'rxjs';
 import { User } from '../models/user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BSubjectUserService {
-  private user = new BehaviorSubject<User | undefined>(undefined);
+  private user = new BehaviorSubject<User | undefined>(
+    localStorage.getItem('user')
+      ? JSON.parse(localStorage.getItem('user') + '')
+      : undefined
+  );
   currentUser = this.user.asObservable();
 
-  constructor() { }
+  constructor() {}
 
   setUser(user: User | undefined) {
     this.user.next(user);

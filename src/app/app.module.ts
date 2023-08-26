@@ -14,6 +14,7 @@ import { LoginComponent } from './components/login/login.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
 import { ProductComponent } from './components/product/product.component';
+import { PriceBeforeDiscountPipe } from './pipes/price-before-discount.pipe';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ProductComponent } from './components/product/product.component';
     FooterComponent,
     LoginComponent,
     SpinnerComponent,
-    ProductComponent
+    ProductComponent,
+    PriceBeforeDiscountPipe
   ],
   imports: [
     BrowserModule,
