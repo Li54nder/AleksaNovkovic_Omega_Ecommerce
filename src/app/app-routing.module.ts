@@ -3,9 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
+import { ProductComponent } from './components/product/product.component';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
+  { path: 'product/:id', component: ProductComponent },
+
   { path: 'login', component: LoginComponent },
 
   // {

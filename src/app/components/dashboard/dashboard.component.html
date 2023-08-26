@@ -1,38 +1,65 @@
-<app-header></app-header>
 <div class="page">
   <div class="content">
-    <form class="form">
+    <form [formGroup]="form" class="form" (keyup.enter)="onSearch()">
       <mat-form-field>
-        <mat-label><mat-icon>search</mat-icon> Search...</mat-label>
-        <input matInput placeholder="...">
+        <mat-label><mat-icon>search</mat-icon> Search for product</mat-label>
+        <input matInput formControlName="query" />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Select product category</mat-label>
+        <mat-select formControlName="category" (selectionChange)="searchByCategory($event)">
+          <mat-option value="">All categories</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+        </mat-select>
       </mat-form-field>
     </form>
 
-    <div class="grid">
-      <mat-card class="card" *ngFor="let product of products" [matTooltip]="product.title">
+    <div
+      class="grid"
+      infiniteScroll
+      [infiniteScrollDistance]="1"
+      [infiniteScrollThrottle]="500"
+      (scrolled)="onScroll()"
+    >
+      <mat-card
+        class="card"
+        *ngFor="let product of products"
+        [matTooltip]="product.title"
+        [routerLink]="'product/' + product.id"
+      >
         <div class="card-heading">
           <mat-card-header>
-            <mat-card-title>{{product.title}}</mat-card-title>
-            <mat-card-subtitle>Stock: {{product.stock}}</mat-card-subtitle>
+            <mat-card-title>{{ product.title }}</mat-card-title>
+            <mat-card-subtitle>Stock: {{ product.stock }}</mat-card-subtitle>
           </mat-card-header>
-          <img mat-card-image [src]="product.images[0]" [alt]="product.title">
+          <img mat-card-image [src]="product.images[0]" [alt]="product.title" />
         </div>
         <div>
           <mat-card-content>
             <p class="description">
-              {{product.description}}
+              {{ product.description }}
             </p>
+            <h3 class="price">
+              {{product.price}} €
+            </h3>
           </mat-card-content>
-          <mat-card-actions class="actions">
+          <mat-card-actions class="actions" *ngIf="!!user">
             <button mat-icon-button>
               <!-- <mat-icon>favorite</mat-icon> -->
               <mat-icon>favorite_border</mat-icon>
             </button>
-            <button mat-raised-button><mat-icon>shopping_cart</mat-icon>Add Cart</button>
+            <button mat-raised-button>
+              <mat-icon>shopping_cart</mat-icon>Add to cart
+            </button>
           </mat-card-actions>
         </div>
       </mat-card>
     </div>
+    <p *ngIf="!loading && !products.length">
+      There are no products to display
+    </p>
+    <div *ngIf="loading" class="loading">
+      <app-spinner></app-spinner>
+    </div>
   </div>
 </div>
-

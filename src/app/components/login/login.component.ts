@@ -1,18 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { BSubjectUserService } from 'src/app/services/b-subject-user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  hide = true;
   form!: FormGroup;
+  user!: User;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
+    private router: Router,
+    private userSubject: BSubjectUserService
   ) { }
 
   ngOnInit(): void {
@@ -20,29 +27,17 @@ export class LoginComponent {
       username: ['kminchelle', Validators.required],
       password: ['0lelplR', Validators.required]
     })
-    // if(localStorage.getItem("token")) {
-    //   this.router.navigate(['portal']);
-    // }
   }
 
   formSubmit() {
-    this.authService.login(this.form.value.username, this.form.value.password).pipe(
-      // this.toast.observe({
-      //   loading: "Prijavljivanje u toku...",
-      //   success: "Kredencijali su validni!",
-      //   error: "Neuspešna prijava!"
-      // })
-    ).subscribe({
+    this.authService.login(this.form.value.username, this.form.value.password).subscribe({
       next: res => {
-        console.log(res);
-
-        localStorage.setItem('token', res["token"]);
-        // this.router.navigate(['/portal']);
+        this.userSubject.setUser(res);
+        localStorage.setItem('token', res.token);
+        this.router.navigate(['/']);
       },
       error: err => {
-        // this.loading = false;
-        console.log(err);
-
+        //TODO: hot-toast
       }
     })
   }

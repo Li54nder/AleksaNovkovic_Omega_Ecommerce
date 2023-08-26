@@ -11,6 +11,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { SpinnerComponent } from './components/shared/spinner/spinner.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,9 @@ import { LoginComponent } from './components/login/login.component';
     DashboardComponent,
     HeaderComponent,
     FooterComponent,
-    LoginComponent
+    LoginComponent,
+    SpinnerComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -28,6 +33,7 @@ import { LoginComponent } from './components/login/login.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

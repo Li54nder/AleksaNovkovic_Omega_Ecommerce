@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user';
+import { BSubjectUserService } from 'src/app/services/b-subject-user.service';
 
 @Component({
   selector: 'app-header',
@@ -6,13 +9,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  loggedIn = false;
+  user: User | undefined;
 
-  constructor() {}
+  constructor(
+    private router: Router,
+    private userSubject: BSubjectUserService
+  ) {}
 
   ngOnInit() {
-    // TODO: check if token is valid
-    this.loggedIn = !!localStorage.getItem('token');
+    this.userSubject.currentUser.subscribe(user => {
+      this.user = user;
+    });
   }
 
+  logout() {
+    localStorage.removeItem('token');
+    this.userSubject.setUser(undefined);
+  }
+
+  login() {
+    this.router.navigate(['login']);
+  }
 }

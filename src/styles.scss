@@ -1,2 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; overflow-y: scroll;}
+
+.page {
+  margin-top: 60px;
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  justify-content: center;
+  .content {
+    width: 100%;
+    max-width: 1024px;
+    padding: 10px 20px;
+    box-sizing: border-box;
+  }
+}

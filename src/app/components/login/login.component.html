@@ -1,14 +1,20 @@
-<form [formGroup]="form">
-  <mat-form-field>
-    <mat-label>Search...</mat-label>
-    <input matInput formControlName="username" placeholder="...">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Search...</mat-label>
-    <input matInput formControlName="password" placeholder="...">
-  </mat-form-field>
+<div class="page">
+  <div class="content">
+    <form [formGroup]="form">
+      <h2>Go to your profile</h2>
+      <mat-form-field>
+        <mat-label>Username</mat-label>
+        <input matInput formControlName="username">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </mat-form-field>
 
-  <button mat-flat-button (click)="formSubmit()" [disabled]="form.invalid">
-    <span>Prijava</span>
-  </button>
-</form>
+      <button mat-raised-button color="primary" (click)="formSubmit()" [disabled]="form.invalid">
+        <span>Log In</span>
+      </button>
+    </form>
+  </div>
+</div>
