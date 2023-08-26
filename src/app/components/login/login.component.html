@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Search...</mat-label>
+    <input matInput formControlName="username" placeholder="...">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Search...</mat-label>
+    <input matInput formControlName="password" placeholder="...">
+  </mat-form-field>
+
+  <button mat-flat-button (click)="formSubmit()" [disabled]="form.invalid">
+    <span>Prijava</span>
+  </button>
+</form>
