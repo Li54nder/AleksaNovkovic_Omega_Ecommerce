@@ -1,0 +1,20 @@
+<div class="page">
+  <div class="content">
+    <h2>Checkout your cart:</h2>
+    <div class="center" *ngIf="loading">
+      <app-spinner></app-spinner>
+    </div>
+    <div class="data" *ngIf="!loading">
+      <div class="list">
+        <app-item
+          *ngFor="let product of products"
+          [product]="product"
+        ></app-item>
+      </div>
+      <div class="action">
+        <span>TOTAL: {{ total }}€</span>
+        <button mat-flat-button color="primary" (click)="purchase()">Purchase</button>
+      </div>
+    </div>
+  </div>
+</div>

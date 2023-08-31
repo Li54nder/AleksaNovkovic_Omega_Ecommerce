@@ -4,10 +4,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { ProductComponent } from './components/product/product.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { authGuard } from './services/auth.guard';
 
 const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'product/:id', component: ProductComponent },
+  { path: 'favorites', component: FavoritesComponent, canActivate: [authGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard] },
 
   { path: 'login', component: LoginComponent },
 

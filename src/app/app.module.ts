@@ -15,6 +15,16 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
 import { ProductComponent } from './components/product/product.component';
 import { PriceBeforeDiscountPipe } from './pipes/price-before-discount.pipe';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { FavoritesComponent } from './components/favorites/favorites.component';
+import { JWT_OPTIONS, JwtHelperService } from '@auth0/angular-jwt';
+import { ItemComponent } from './components/checkout/item/item.component';
+import { AdditionalInfoDialogComponent } from './components/checkout/additional-info-dialog/additional-info-dialog.component';
+import { HotToastModule } from '@ngneat/hot-toast';
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -25,7 +35,11 @@ import { PriceBeforeDiscountPipe } from './pipes/price-before-discount.pipe';
     LoginComponent,
     SpinnerComponent,
     ProductComponent,
-    PriceBeforeDiscountPipe
+    PriceBeforeDiscountPipe,
+    CheckoutComponent,
+    FavoritesComponent,
+    ItemComponent,
+    AdditionalInfoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,9 +49,22 @@ import { PriceBeforeDiscountPipe } from './pipes/price-before-discount.pipe';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    HotToastModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService,
+    // MatSnackBarModule
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        duration: 2500,
+        // horizontalPosition: 'end',
+        // verticalPosition: 'bottom',
+      },
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

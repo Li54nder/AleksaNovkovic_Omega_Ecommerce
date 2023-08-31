@@ -6,6 +6,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 const array = [
   MatButtonModule,
@@ -13,7 +15,9 @@ const array = [
   MatTooltipModule,
   MatInputModule,
   MatCardModule,
-  MatSelectModule
+  MatSelectModule,
+  MatDialogModule,
+  MatSnackBarModule
 ]
 
 @NgModule({

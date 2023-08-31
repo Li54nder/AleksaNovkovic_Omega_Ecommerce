@@ -1,4 +1,5 @@
 export interface Product {
+quantity: any;
   "id": number,
   "title": string,
   "description": string,
@@ -9,5 +10,7 @@ export interface Product {
   "brand": string,
   "category": string,
   "thumbnail": string,
-  "images": string[]
+  "images": string[],
+
+  "total"?: number
 }

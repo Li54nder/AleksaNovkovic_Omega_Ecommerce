@@ -4,6 +4,7 @@ import { MatSelectChange } from '@angular/material/select';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
 import { BSubjectUserService } from 'src/app/services/b-subject-user.service';
+import { CartsService } from 'src/app/services/carts.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -25,6 +26,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private productsService: ProductsService,
+    private cartsService: CartsService,
     private userSubject: BSubjectUserService
   ) {}
 
@@ -105,5 +107,32 @@ export class DashboardComponent implements OnInit {
         this.products = res.products;
       }
     });
+  }
+
+  addToCart(event: MouseEvent, productId: number) {
+    event.stopImmediatePropagation();
+    if (this.user) {
+      const product = {
+        id: productId,
+        quantity: 1
+      }
+      const cartId = localStorage.getItem('cartId');
+      if(!cartId) {
+        // Create new CART for the user who hasn't it yet
+        this.cartsService.createCartForUser(this.user.id, [product]).subscribe({
+          next: res => {
+            console.log(res);
+          }
+        })
+      } else {
+        // Add product to existing CART
+        this.cartsService.updateCartWithProducts(+cartId, [product]).subscribe({
+          next: res => {
+            console.log(res);
+            localStorage.setItem('cartId', res.id);
+          }
+        })
+      }
+    }
   }
 }

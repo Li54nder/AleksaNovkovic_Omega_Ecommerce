@@ -1,0 +1,23 @@
+.center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .action {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-size: 26px;
+  }
+}
