@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'product/:id', component: ProductComponent },
   { path: 'favorites', component: FavoritesComponent, canActivate: [authGuard] },
-  { path: 'checkout', component: CheckoutComponent, canActivate: [authGuard] },
+  { path: 'checkout', component: CheckoutComponent }, // Task description says that this page is available for everyone but only logged in users can call API for adding products to the cart (/carts/add)
 
   { path: 'login', component: LoginComponent },
 

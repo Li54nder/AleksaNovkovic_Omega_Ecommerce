@@ -25,6 +25,7 @@ import {
   MAT_SNACK_BAR_DEFAULT_OPTIONS,
   MatSnackBarModule,
 } from '@angular/material/snack-bar';
+import { IsInFavoritePipe } from './pipes/is-in-favorite.pipe';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import {
     FavoritesComponent,
     ItemComponent,
     AdditionalInfoDialogComponent,
+    IsInFavoritePipe,
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,6 @@ import {
   providers: [
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService,
-    // MatSnackBarModule
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {

@@ -1,5 +1,10 @@
 <div class="page">
-  <div class="content">
+  <div *ngIf="!user" class="content center column">
+    <!-- Task description says that this page is available for everyone but only logged in users can call API for adding products to the cart (/carts/add) -->
+    <h2>Your cart is empty! Log in to add products to your cart.</h2>
+    <img src="assets/img/emptyCart.png" alt="Empty Cart">
+  </div>
+  <div *ngIf="!!user" class="content">
     <h2>Checkout your cart:</h2>
     <div class="center" *ngIf="loading">
       <app-spinner></app-spinner>

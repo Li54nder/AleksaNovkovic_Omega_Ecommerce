@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
 import { BSubjectUserService } from 'src/app/services/b-subject-user.service';
@@ -22,12 +23,14 @@ export class DashboardComponent implements OnInit {
   form!: FormGroup;
 
   user: User | undefined;
+  dummyCounter = 0;
 
   constructor(
     private fb: FormBuilder,
     private productsService: ProductsService,
     private cartsService: CartsService,
-    private userSubject: BSubjectUserService
+    private userSubject: BSubjectUserService,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -120,19 +123,51 @@ export class DashboardComponent implements OnInit {
       if(!cartId) {
         // Create new CART for the user who hasn't it yet
         this.cartsService.createCartForUser(this.user.id, [product]).subscribe({
-          next: res => {
-            console.log(res);
+          next: _ => {
+            this.snackBar.open('Product added to your cart!')
           }
         })
       } else {
         // Add product to existing CART
         this.cartsService.updateCartWithProducts(+cartId, [product]).subscribe({
           next: res => {
-            console.log(res);
+            this.snackBar.open('Product added to your cart!')
             localStorage.setItem('cartId', res.id);
           }
         })
       }
+    }
+  }
+
+  toggleFavorite(event: MouseEvent, product: Product) {
+    this.dummyCounter++;
+    event.stopImmediatePropagation();
+    let favorites = localStorage.getItem('favorites');
+    if (!favorites) {
+      let newArr = [{
+        id: product.id,
+        title: product.title,
+        price: product.price,
+        discountPercentage: product.discountPercentage
+      }];
+      localStorage.setItem('favorites', JSON.stringify(newArr));
+      this.snackBar.open('Product added to favorites!')
+    }
+    else {
+      let favoritesArr = JSON.parse(favorites);
+      if (favoritesArr.find((p: {id: number}) => p.id === product.id)) {
+        favoritesArr = favoritesArr.filter((p: {id: number}) => p.id !== product.id);
+        this.snackBar.open('Product removed from favorites!')
+      } else {
+        favoritesArr = [...favoritesArr, {
+          id: product.id,
+          title: product.title,
+          price: product.price,
+          discountPercentage: product.discountPercentage
+        }];
+        this.snackBar.open('Product added to favorites!')
+      }
+      localStorage.setItem('favorites', JSON.stringify(favoritesArr));
     }
   }
 }

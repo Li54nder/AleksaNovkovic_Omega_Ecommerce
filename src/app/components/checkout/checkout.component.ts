@@ -5,7 +5,6 @@ import { User } from 'src/app/models/user';
 import { BSubjectUserService } from 'src/app/services/b-subject-user.service';
 import { CartsService } from 'src/app/services/carts.service';
 import { AdditionalInfoDialogComponent } from './additional-info-dialog/additional-info-dialog.component';
-import { HotToastService } from '@ngneat/hot-toast';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -23,7 +22,6 @@ export class CheckoutComponent implements OnInit {
     private cartsService: CartsService,
     private userSubject: BSubjectUserService,
     private dialog: MatDialog,
-    // private toastService: HotToastService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -32,7 +30,7 @@ export class CheckoutComponent implements OnInit {
       this.user = user;
       if(this.user) {
         this.loading = true;
-        this.cartsService.getCartsForUser(this.user.id).subscribe({
+        this.cartsService.getCartForUser(this.user.id).subscribe({
           next: res => {
             localStorage.setItem('cartId', res.carts[0].id);
             this.products = res.carts[0].products;
