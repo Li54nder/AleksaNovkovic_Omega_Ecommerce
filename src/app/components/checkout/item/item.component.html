@@ -28,5 +28,11 @@
       (click)="updateQuantity(product.id, product.quantity, true)">
       +
     </button>
+    <button
+      mat-mini-fab
+      color="accent"
+      (click)="removeProduct(product.id)">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
   </mat-card-actions>
 </mat-card>

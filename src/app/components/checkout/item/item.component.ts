@@ -27,7 +27,9 @@ export class ItemComponent {
       }
       this.updateItem.emit(product);
     }
-
   }
 
+  removeProduct(productId: number) {
+    this.deleteItem.emit(productId);
+  }
 }
