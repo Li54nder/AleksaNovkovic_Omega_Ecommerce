@@ -9,6 +9,8 @@
         <app-item
           *ngFor="let product of products"
           [product]="product"
+          (deleteItem)="deleteItem($event)"
+          (updateItem)="updateItem($event)"
         ></app-item>
       </div>
       <div class="action">

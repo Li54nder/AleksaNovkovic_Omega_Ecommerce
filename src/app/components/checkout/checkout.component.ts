@@ -34,12 +34,9 @@ export class CheckoutComponent implements OnInit {
         this.loading = true;
         this.cartsService.getCartsForUser(this.user.id).subscribe({
           next: res => {
-            // fix type
-            res.carts.forEach((cart: any) => {
-              this.products = [...this.products, ...cart.products];
-              this.total += cart.total;
-            });
-
+            localStorage.setItem('cartId', res.carts[0].id);
+            this.products = res.carts[0].products;
+            this.total = res.carts[0].total;
             this.loading = false;
           }
         })
@@ -54,12 +51,34 @@ export class CheckoutComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(success => {
       success
-        ? this.snackBar.open('success!')
-        : this.snackBar.open('aborted!');
-      // success
-      //   ? this.toastService.success('success!')
-      //   : this.toastService.success('aborted!');
+        ? this.snackBar.open('Product purchased!') //TODO: implement product purchasing
+        : this.snackBar.open('Purchasing aborted!');
     })
   }
 
+  deleteItem(productId: number) {
+    this.products = this.products.filter(p => p.id !== productId);
+    this.updateCart();
+  }
+
+  updateItem(product: {id: number, quantity: number}) {
+    this.products.map(p => {
+      if (p.id === product.id) {
+        p.quantity = product.quantity
+      }
+    });
+    this.updateCart();
+  }
+
+  updateCart() {
+    const cartId = localStorage.getItem('cartId');
+    cartId
+      ? this.cartsService.updateCartWithProducts(+cartId, this.products).subscribe({
+          next: res => {
+            this.total = res.total;
+            this.snackBar.open('Cart updated successfully!');
+          }
+        })
+      : this.snackBar.open('Cart not found!');
+  }
 }
