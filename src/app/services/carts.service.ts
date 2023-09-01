@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import { AddedChart, GetUserCharts, UpdatedChart } from '../models/charts';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class CartsService {
 
   getCartForUser(userId: number) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<any>(environment.url + `/users/${userId}/carts`, {
+    return this.http.get<GetUserCharts>(environment.url + `/users/${userId}/carts`, {
       headers,
     });
   }
@@ -27,7 +28,7 @@ export class CartsService {
       userId,
       products,
     };
-    return this.http.post<any>(environment.url + `/carts/add`, body, {
+    return this.http.post<AddedChart>(environment.url + `/carts/add`, body, {
       headers,
     });
   }
@@ -41,7 +42,7 @@ export class CartsService {
       merge: false,
       products,
     };
-    return this.http.put<any>(environment.url + `/carts/${cartId}`, body, {
+    return this.http.put<UpdatedChart>(environment.url + `/carts/${cartId}`, body, {
       headers,
     });
   }

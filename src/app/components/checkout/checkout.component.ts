@@ -32,7 +32,7 @@ export class CheckoutComponent implements OnInit {
         this.loading = true;
         this.cartsService.getCartForUser(this.user.id).subscribe({
           next: (res) => {
-            localStorage.setItem('cartId', res.carts[0].id);
+            localStorage.setItem('cartId', res.carts[0].id + '');
             this.products = res.carts[0].products;
             this.total = res.carts[0].total;
             this.loading = false;

@@ -139,7 +139,7 @@ export class DashboardComponent implements OnInit {
         this.cartsService.updateCartWithProducts(+cartId, [product]).subscribe({
           next: (res) => {
             this.snackBar.open('Product added to your cart!');
-            localStorage.setItem('cartId', res.id);
+            localStorage.setItem('cartId', res.id + '');
           },
         });
       }
