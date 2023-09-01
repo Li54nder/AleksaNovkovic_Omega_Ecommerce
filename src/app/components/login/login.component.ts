@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private userSubject: BSubjectUserService,
+    public userSubject: BSubjectUserService,
     private snackBar: MatSnackBar
   ) {}
 
