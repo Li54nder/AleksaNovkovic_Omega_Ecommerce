@@ -24,6 +24,7 @@ export class DashboardComponent implements OnInit {
 
   user: User | undefined;
   dummyCounter = 0;
+  triggerSearch = false;
 
   constructor(
     private fb: FormBuilder,
@@ -48,7 +49,7 @@ export class DashboardComponent implements OnInit {
       category: undefined
     });
     this.form.controls['query'].valueChanges.subscribe(value => {
-      if(!value) {
+      if(!value && this.triggerSearch) {
         this.clearDashboard();
         this.getProducts();
       }
@@ -81,11 +82,16 @@ export class DashboardComponent implements OnInit {
   }
 
   onScroll() {
-    this.getProducts();
+    const category = this.form.value['category']
+    const query = this.form.value['query']
+    if (!category && !query) {
+      this.getProducts();
+    }
   }
 
   onSearch() {
     this.clearDashboard();
+    this.triggerSearch = true;
     this.form.controls['category'].setValue(undefined);
     this.loading = true;
     this.productsService.getProductsByQuery(this.form.value.query).subscribe({
@@ -98,7 +104,8 @@ export class DashboardComponent implements OnInit {
 
   searchByCategory(event: MatSelectChange) {
     this.clearDashboard();
-    this.form.controls['query'].setValue('');
+    this.triggerSearch = false;
+    this.form.controls['query'].reset();
     if(!event.value) {
       this.getProducts();
       return;

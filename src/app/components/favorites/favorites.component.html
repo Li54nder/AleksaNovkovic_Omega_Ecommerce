@@ -1,5 +1,19 @@
 <div class="page">
-  <div class="content">
-    <p>favorites works!</p>
+  <div *ngIf="!favorites.length" class="content center column">
+    <h2>There are no added products to favorites</h2>
+    <img src="assets/img/heart.png" alt="There are no favorite products">
+  </div>
+  <div *ngIf="!!favorites.length" class="content">
+    <h2>Your favorite products:</h2>
+    <div class="data">
+      <div class="list">
+        <app-fav-item
+          *ngFor="let product of favorites"
+          [product]="product"
+          (removeFromFavEmit)="removeFromFav($event)"
+          (addToCartEmit)="addToCart($event)"
+        ></app-fav-item>
+      </div>
+    </div>
   </div>
 </div>

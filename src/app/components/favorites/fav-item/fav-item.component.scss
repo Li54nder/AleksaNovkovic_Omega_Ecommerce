@@ -1,0 +1,49 @@
+@import 'colors';
+
+.item {
+  background-color: $gray-light;
+  display: flex;
+  flex-direction: row;
+
+  .content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    .text-content {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        h3 {
+          font-weight: 500;
+          margin: 0;
+        }
+      }
+
+      .price {
+        strong {
+          font-weight: 500;
+          font-size: 20px;
+        }
+
+        span {
+          color: $gray-dark;
+          font-size: 14px;
+          text-decoration: line-through;
+        }
+      }
+    }
+  }
+
+  .actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+}

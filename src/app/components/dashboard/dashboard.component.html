@@ -8,7 +8,7 @@
       <mat-form-field>
         <mat-label>Select product category</mat-label>
         <mat-select formControlName="category" (selectionChange)="searchByCategory($event)">
-          <mat-option value="">All categories</mat-option>
+          <mat-option [value]="undefined">All categories</mat-option>
           <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
         </mat-select>
       </mat-form-field>
@@ -45,7 +45,6 @@
           </mat-card-content>
           <mat-card-actions class="actions" *ngIf="!!user">
             <button mat-icon-button (click)="toggleFavorite($event, product)">
-              <!-- <mat-icon>favorite</mat-icon> -->
               <mat-icon>{{(product.id | isInFavorite:dummyCounter)? 'favorite' : 'favorite_border' }}</mat-icon>
             </button>
             <button mat-raised-button (click)="addToCart($event, product.id)">

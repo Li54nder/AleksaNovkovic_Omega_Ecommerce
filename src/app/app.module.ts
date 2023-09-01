@@ -26,6 +26,7 @@ import {
   MatSnackBarModule,
 } from '@angular/material/snack-bar';
 import { IsInFavoritePipe } from './pipes/is-in-favorite.pipe';
+import { FavItemComponent } from './components/favorites/fav-item/fav-item.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { IsInFavoritePipe } from './pipes/is-in-favorite.pipe';
     ItemComponent,
     AdditionalInfoDialogComponent,
     IsInFavoritePipe,
+    FavItemComponent,
   ],
   imports: [
     BrowserModule,

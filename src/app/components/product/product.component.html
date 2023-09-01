@@ -42,11 +42,10 @@
       </div>
 
       <div class="actions" *ngIf="!!user">
-        <button mat-icon-button>
-          <!-- <mat-icon>favorite</mat-icon> -->
-          <mat-icon>favorite_border</mat-icon>
+        <button mat-icon-button (click)="toggleFavorite(product)">
+          <mat-icon>{{(product.id | isInFavorite:dummyCounter)? 'favorite' : 'favorite_border' }}</mat-icon>
         </button>
-        <button mat-flat-button color="primary">
+        <button mat-flat-button color="primary" (click)="addToCart(product.id)">
           <mat-icon>shopping_cart</mat-icon>Add to cart
         </button>
       </div>
