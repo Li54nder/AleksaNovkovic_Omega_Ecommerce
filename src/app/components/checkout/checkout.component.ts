@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  styleUrls: ['./checkout.component.scss'],
 })
 export class CheckoutComponent implements OnInit {
   user: User | undefined;
@@ -26,18 +26,18 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userSubject.currentUser.subscribe(user => {
+    this.userSubject.currentUser.subscribe((user) => {
       this.user = user;
-      if(this.user) {
+      if (this.user) {
         this.loading = true;
         this.cartsService.getCartForUser(this.user.id).subscribe({
-          next: res => {
+          next: (res) => {
             localStorage.setItem('cartId', res.carts[0].id);
             this.products = res.carts[0].products;
             this.total = res.carts[0].total;
             this.loading = false;
-          }
-        })
+          },
+        });
       }
     });
   }
@@ -47,22 +47,22 @@ export class CheckoutComponent implements OnInit {
       height: '400px',
       width: '600px',
     });
-    dialogRef.afterClosed().subscribe(success => {
+    dialogRef.afterClosed().subscribe((success) => {
       success
         ? this.snackBar.open('Product purchased!') //TODO: implement product purchasing
         : this.snackBar.open('Purchasing aborted!');
-    })
+    });
   }
 
   deleteItem(productId: number) {
-    this.products = this.products.filter(p => p.id !== productId);
+    this.products = this.products.filter((p) => p.id !== productId);
     this.updateCart();
   }
 
-  updateItem(product: {id: number, quantity: number}) {
-    this.products.map(p => {
+  updateItem(product: { id: number; quantity: number }) {
+    this.products.map((p) => {
       if (p.id === product.id) {
-        p.quantity = product.quantity
+        p.quantity = product.quantity;
       }
     });
     this.updateCart();
@@ -71,12 +71,14 @@ export class CheckoutComponent implements OnInit {
   updateCart() {
     const cartId = localStorage.getItem('cartId');
     cartId
-      ? this.cartsService.updateCartWithProducts(+cartId, this.products).subscribe({
-          next: res => {
-            this.total = res.total;
-            this.snackBar.open('Cart updated successfully!');
-          }
-        })
+      ? this.cartsService
+          .updateCartWithProducts(+cartId, this.products)
+          .subscribe({
+            next: (res) => {
+              this.total = res.total;
+              this.snackBar.open('Cart updated successfully!');
+            },
+          })
       : this.snackBar.open('Cart not found!');
   }
 }

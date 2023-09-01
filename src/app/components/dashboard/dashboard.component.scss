@@ -8,12 +8,14 @@
       width: 100%;
       display: flex;
       gap: 20px;
+
       @include breakpoint(phablet) {
         flex-direction: column;
         align-items: center;
         gap: 0;
       }
-      & > * {
+
+      &>* {
         width: 100%;
         max-width: 500px;
       }
@@ -25,12 +27,15 @@
       display: grid;
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
       gap: 20px;
+
       @include breakpoint(tablet) {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr);
       }
+
       @include breakpoint(phablet) {
         grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       }
+
       @include breakpoint(mobile) {
         grid-template-columns: minmax(0, 1fr);
       }
@@ -42,17 +47,21 @@
         justify-content: space-between;
         cursor: pointer;
         transition: background-color .2s;
+
         &:hover {
           background-color: $gray;
         }
+
         .card-heading {
           display: flex;
           flex-direction: column;
           align-items: center;
+
           .mat-mdc-card-header {
             width: 100%;
             box-sizing: border-box;
           }
+
           .mat-mdc-card-title {
             overflow: hidden;
             text-overflow: ellipsis;
@@ -60,6 +69,7 @@
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
           }
+
           img {
             width: auto;
             max-width: 100%;
@@ -68,6 +78,7 @@
             overflow: hidden;
           }
         }
+
         .description {
           overflow: hidden;
           text-overflow: ellipsis;
@@ -75,13 +86,16 @@
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
         }
+
         .price {
           text-align: center;
           font-size: 24px;
         }
+
         .actions {
           width: 100%;
           display: flex;
+
           button:last-child {
             flex: 1;
           }

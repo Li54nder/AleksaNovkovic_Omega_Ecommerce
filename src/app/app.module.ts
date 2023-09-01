@@ -9,7 +9,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/shared/header/header.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
 import { LoginComponent } from './components/login/login.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { SpinnerComponent } from './components/shared/spinner/spinner.component';
@@ -27,13 +26,13 @@ import {
 } from '@angular/material/snack-bar';
 import { IsInFavoritePipe } from './pipes/is-in-favorite.pipe';
 import { FavItemComponent } from './components/favorites/fav-item/fav-item.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     HeaderComponent,
-    FooterComponent,
     LoginComponent,
     SpinnerComponent,
     ProductComponent,
@@ -44,6 +43,7 @@ import { FavItemComponent } from './components/favorites/fav-item/fav-item.compo
     AdditionalInfoDialogComponent,
     IsInFavoritePipe,
     FavItemComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,8 +63,6 @@ import { FavItemComponent } from './components/favorites/fav-item/fav-item.compo
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {
         duration: 2500,
-        // horizontalPosition: 'end',
-        // verticalPosition: 'bottom',
       },
     },
   ],

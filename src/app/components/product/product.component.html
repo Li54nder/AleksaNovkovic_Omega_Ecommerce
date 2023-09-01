@@ -37,13 +37,25 @@
         </div>
         <div class="row">
           <div>Price:</div>
-          <div class="price"><strong>{{ product.price }} € </strong> <span>{{ product.price | priceBeforeDiscount:product.discountPercentage}} €</span></div>
+          <div class="price">
+            <strong>{{ product.price }} € </strong>
+            <span
+              >{{
+                product.price | priceBeforeDiscount : product.discountPercentage
+              }}
+              €</span
+            >
+          </div>
         </div>
       </div>
 
       <div class="actions" *ngIf="!!user">
         <button mat-icon-button (click)="toggleFavorite(product)">
-          <mat-icon>{{(product.id | isInFavorite:dummyCounter)? 'favorite' : 'favorite_border' }}</mat-icon>
+          <mat-icon>{{
+            (product.id | isInFavorite : dummyCounter)
+              ? "favorite"
+              : "favorite_border"
+          }}</mat-icon>
         </button>
         <button mat-flat-button color="primary" (click)="addToCart(product.id)">
           <mat-icon>shopping_cart</mat-icon>Add to cart

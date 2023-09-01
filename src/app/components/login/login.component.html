@@ -4,15 +4,26 @@
       <h2>Go to your profile</h2>
       <mat-form-field>
         <mat-label>Username</mat-label>
-        <input matInput formControlName="username">
+        <input matInput formControlName="username" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Password</mat-label>
-        <input matInput formControlName="password" [type]="hide ? 'password' : 'text'">
-        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <input
+          matInput
+          formControlName="password"
+          [type]="hide ? 'password' : 'text'"
+        />
+        <mat-icon matSuffix (click)="hide = !hide">{{
+          hide ? "visibility_off" : "visibility"
+        }}</mat-icon>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="formSubmit()" [disabled]="form.invalid">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="formSubmit()"
+        [disabled]="form.invalid"
+      >
         <span>Log In</span>
       </button>
     </form>

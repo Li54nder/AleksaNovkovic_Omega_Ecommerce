@@ -10,17 +10,17 @@ import { ProductsService } from 'src/app/services/products.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.scss']
+  styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
   id!: number;
   loading = false;
   product!: Product;
   favorites: {
-    id: number
-    title: string
-    price: number
-    discountPercentage: number
+    id: number;
+    title: string;
+    price: number;
+    discountPercentage: number;
   }[] = [];
 
   user: User | undefined;
@@ -35,53 +35,59 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userSubject.currentUser.subscribe(user => {
+    this.userSubject.currentUser.subscribe((user) => {
       this.user = user;
     });
     let fav = localStorage.getItem('favorites');
-    this.favorites = fav? JSON.parse(fav) : [];
+    this.favorites = fav ? JSON.parse(fav) : [];
     const param = this.route.snapshot.paramMap.get('id');
-    this.id = param? +param : 0;
+    this.id = param ? +param : 0;
     this.getProduct();
   }
 
   getProduct() {
     this.loading = true;
     this.productsService.getProductById(this.id).subscribe({
-      next: res => {
+      next: (res) => {
         this.loading = false;
         console.log(res);
         this.product = res;
-      }
-    })
+      },
+    });
   }
 
   toggleFavorite(product: Product) {
     this.dummyCounter++;
     let favorites = localStorage.getItem('favorites');
     if (!favorites) {
-      let newArr = [{
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        discountPercentage: product.discountPercentage
-      }];
-      localStorage.setItem('favorites', JSON.stringify(newArr));
-      this.snackBar.open('Product added to favorites!')
-    }
-    else {
-      let favoritesArr = JSON.parse(favorites);
-      if (favoritesArr.find((p: {id: number}) => p.id === product.id)) {
-        favoritesArr = favoritesArr.filter((p: {id: number}) => p.id !== product.id);
-        this.snackBar.open('Product removed from favorites!')
-      } else {
-        favoritesArr = [...favoritesArr, {
+      let newArr = [
+        {
           id: product.id,
           title: product.title,
           price: product.price,
-          discountPercentage: product.discountPercentage
-        }];
-        this.snackBar.open('Product added to favorites!')
+          discountPercentage: product.discountPercentage,
+        },
+      ];
+      localStorage.setItem('favorites', JSON.stringify(newArr));
+      this.snackBar.open('Product added to favorites!');
+    } else {
+      let favoritesArr = JSON.parse(favorites);
+      if (favoritesArr.find((p: { id: number }) => p.id === product.id)) {
+        favoritesArr = favoritesArr.filter(
+          (p: { id: number }) => p.id !== product.id
+        );
+        this.snackBar.open('Product removed from favorites!');
+      } else {
+        favoritesArr = [
+          ...favoritesArr,
+          {
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            discountPercentage: product.discountPercentage,
+          },
+        ];
+        this.snackBar.open('Product added to favorites!');
       }
       localStorage.setItem('favorites', JSON.stringify(favoritesArr));
     }
@@ -91,24 +97,24 @@ export class ProductComponent implements OnInit {
     if (this.user) {
       const product = {
         id: productId,
-        quantity: 1
-      }
+        quantity: 1,
+      };
       const cartId = localStorage.getItem('cartId');
-      if(!cartId) {
+      if (!cartId) {
         // Create new CART for the user who hasn't it yet
         this.cartsService.createCartForUser(this.user.id, [product]).subscribe({
-          next: _ => {
-            this.snackBar.open('Product added to your cart!')
-          }
-        })
+          next: (_) => {
+            this.snackBar.open('Product added to your cart!');
+          },
+        });
       } else {
         // Add product to existing CART
         this.cartsService.updateCartWithProducts(+cartId, [product]).subscribe({
-          next: res => {
-            this.snackBar.open('Product added to your cart!')
+          next: (res) => {
+            this.snackBar.open('Product added to your cart!');
             localStorage.setItem('cartId', res.id);
-          }
-        })
+          },
+        });
       }
     }
   }

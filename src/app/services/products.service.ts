@@ -7,7 +7,6 @@ import { Product } from '../models/product';
   providedIn: 'root',
 })
 export class ProductsService {
-
   constructor(private http: HttpClient) {}
 
   getProducts(skip: number = 0, limit: number = 10) {
@@ -22,7 +21,9 @@ export class ProductsService {
 
   getProductsCategories() {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<string[]>(environment.url + `/products/categories`, { headers });
+    return this.http.get<string[]>(environment.url + `/products/categories`, {
+      headers,
+    });
   }
 
   getProductsByQuery(query: string) {
@@ -47,6 +48,8 @@ export class ProductsService {
 
   getProductById(id: number) {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.get<Product>(environment.url + `/products/${id}`, { headers });
+    return this.http.get<Product>(environment.url + `/products/${id}`, {
+      headers,
+    });
   }
 }

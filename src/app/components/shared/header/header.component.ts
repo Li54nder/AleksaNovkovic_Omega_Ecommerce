@@ -6,7 +6,7 @@ import { BSubjectUserService } from 'src/app/services/b-subject-user.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   user: User | undefined;
@@ -17,15 +17,13 @@ export class HeaderComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.userSubject.currentUser.subscribe(user => {
+    this.userSubject.currentUser.subscribe((user) => {
       this.user = user;
     });
   }
 
   logout() {
     localStorage.clear();
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('user');
     this.userSubject.setUser(undefined);
     this.router.navigate(['login']);
   }

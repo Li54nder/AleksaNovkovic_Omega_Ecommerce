@@ -2,7 +2,7 @@
   <div *ngIf="!user" class="content center column">
     <!-- Task description says that this page is available for everyone but only logged in users can call API for adding products to the cart (/carts/add) -->
     <h2>Your cart is empty! Log in to add products to your cart.</h2>
-    <img src="assets/img/emptyCart.png" alt="Empty Cart">
+    <img src="assets/img/emptyCart.png" alt="Empty Cart" />
   </div>
   <div *ngIf="!!user" class="content">
     <h2>Checkout your cart:</h2>
@@ -20,7 +20,9 @@
       </div>
       <div class="action">
         <span>TOTAL: {{ total }}€</span>
-        <button mat-flat-button color="primary" (click)="purchase()">Purchase</button>
+        <button mat-flat-button color="primary" (click)="purchase()">
+          Purchase
+        </button>
       </div>
     </div>
   </div>

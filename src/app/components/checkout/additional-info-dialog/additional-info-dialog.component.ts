@@ -5,7 +5,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-additional-info-dialog',
   templateUrl: './additional-info-dialog.component.html',
-  styleUrls: ['./additional-info-dialog.component.scss']
+  styleUrls: ['./additional-info-dialog.component.scss'],
 })
 export class AdditionalInfoDialogComponent implements OnInit {
   form!: FormGroup;
@@ -19,12 +19,11 @@ export class AdditionalInfoDialogComponent implements OnInit {
     this.form = this.fb.group({
       address: '',
       phone_number: ['', Validators.required],
-      message: ''
-    })
+      message: '',
+    });
   }
 
   purchase() {
     this.dialogRef.close(true);
   }
-
 }

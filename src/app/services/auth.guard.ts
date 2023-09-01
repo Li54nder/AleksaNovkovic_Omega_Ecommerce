@@ -8,5 +8,5 @@ function isAuthenticated() {
 }
 
 export const authGuard: CanActivateFn = (route, state) => {
-  return isAuthenticated()? true : inject(Router).navigateByUrl('login');
+  return isAuthenticated() ? true : inject(Router).navigateByUrl('login');
 };

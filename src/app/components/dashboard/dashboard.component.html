@@ -7,9 +7,14 @@
       </mat-form-field>
       <mat-form-field>
         <mat-label>Select product category</mat-label>
-        <mat-select formControlName="category" (selectionChange)="searchByCategory($event)">
+        <mat-select
+          formControlName="category"
+          (selectionChange)="searchByCategory($event)"
+        >
           <mat-option [value]="undefined">All categories</mat-option>
-          <mat-option *ngFor="let category of categories" [value]="category">{{category}}</mat-option>
+          <mat-option *ngFor="let category of categories" [value]="category">{{
+            category
+          }}</mat-option>
         </mat-select>
       </mat-form-field>
     </form>
@@ -39,13 +44,15 @@
             <!-- <p class="description">
               {{ product.description }}
             </p> -->
-            <h3 class="price">
-              {{product.price}} €
-            </h3>
+            <h3 class="price">{{ product.price }} €</h3>
           </mat-card-content>
           <mat-card-actions class="actions" *ngIf="!!user">
             <button mat-icon-button (click)="toggleFavorite($event, product)">
-              <mat-icon>{{(product.id | isInFavorite:dummyCounter)? 'favorite' : 'favorite_border' }}</mat-icon>
+              <mat-icon>{{
+                (product.id | isInFavorite : dummyCounter)
+                  ? "favorite"
+                  : "favorite_border"
+              }}</mat-icon>
             </button>
             <button mat-raised-button (click)="addToCart($event, product.id)">
               <mat-icon>shopping_cart</mat-icon>Add to cart
@@ -54,9 +61,7 @@
         </div>
       </mat-card>
     </div>
-    <p *ngIf="!loading && !products.length">
-      There are no products to display
-    </p>
+    <p *ngIf="!loading && !products.length">There are no products to display</p>
     <div *ngIf="loading" class="loading">
       <app-spinner></app-spinner>
     </div>

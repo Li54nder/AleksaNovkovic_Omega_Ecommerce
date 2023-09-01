@@ -18,20 +18,19 @@
     <button
       mat-mini-fab
       color="secondary"
-      (click)="updateQuantity(product.id, product.quantity, false)">
+      (click)="updateQuantity(product.id, product.quantity, false)"
+    >
       -
     </button>
     <span>{{ product.quantity }}</span>
     <button
       mat-mini-fab
       color="primary"
-      (click)="updateQuantity(product.id, product.quantity, true)">
+      (click)="updateQuantity(product.id, product.quantity, true)"
+    >
       +
     </button>
-    <button
-      mat-icon-button
-      color="warn"
-      (click)="removeProduct(product.id)">
+    <button mat-icon-button color="warn" (click)="removeProduct(product.id)">
       <mat-icon>delete_forever</mat-icon>
     </button>
   </mat-card-actions>
