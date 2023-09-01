@@ -19,7 +19,10 @@ export class CartsService {
     userId: number,
     products: { id: number; quantity: number }[]
   ) {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + localStorage.getItem('token') // Bearer token is not required, this is just demo for authorization header
+    });
     const body = {
       userId,
       products,

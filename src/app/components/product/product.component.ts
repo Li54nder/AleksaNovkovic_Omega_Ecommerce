@@ -50,7 +50,6 @@ export class ProductComponent implements OnInit {
     this.productsService.getProductById(this.id).subscribe({
       next: (res) => {
         this.loading = false;
-        console.log(res);
         this.product = res;
       },
     });
